@@ -1,0 +1,7 @@
+# config/serializer/Genere.yaml
+App\Entity\Genere:
+    attributes:
+        id:
+            groups: ['genere']
+        genere:
+            groups: ['genere']

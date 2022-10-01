@@ -47,12 +47,14 @@ class GenereRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    public function getVideojocs()
+    public function getVideojocs(int $id)
     {
-        return $this->getEntityManager()
-            ->getRepository("App\Entity\Videojoc")
+        return $this
             ->createQueryBuilder('g')
-            ->innerJoin('g.videojocs', 'v')
+            ->andWhere('g.id = :id')
+            ->setParameter('id', $id)
+            ->innerJoin('g.videojocs', 'videojoc')
+        
             ->getQuery()
             ->getResult();
     }

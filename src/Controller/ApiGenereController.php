@@ -44,7 +44,7 @@ class ApiGenereController extends AbstractFOSRestController
   }
 
   /**
-   * @Rest\Delete(path="/genere/{id}", name="api_borrarr_genere")
+   * @Rest\Delete(path="/genere/{id}/borrar", name="api_borrar_genere")
    * @Rest\View(serializerGroups={"genere"}, serializerEnableMaxDepthChecks=true)
    */
   public function borrarGenere(int $id): View
@@ -61,15 +61,13 @@ class ApiGenereController extends AbstractFOSRestController
   }
   /**
    * @Rest\Get(path="/genere/{id}", name="api_conseguir_genere")
-   * @Rest\View(serializerGroups={"genere","videojocs"}, serializerEnableMaxDepthChecks=true)
+   * @Rest\View(serializerGroups={"genere"}, serializerEnableMaxDepthChecks=true)
    */
   public function conseguirGenere(int $id): View
   {
-    $genere = $this->obtindreGenereBd($id);
-    $vj=[];
-    foreach ($genere->getVideojocs() as $videojoc ) {
-      array_push($vj,$videojoc);
-    }
+    //$genere = $this->obtindreGenereBd($id);
+    $genere = $this->gr->getVideojocs($id);
+    
     return $this->view([
       "Result" => true,
       "Message" => "Genere amb id $id",

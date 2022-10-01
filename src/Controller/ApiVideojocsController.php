@@ -29,24 +29,23 @@ class ApiVideojocsController extends AbstractFOSRestController
     $this->emi = $emi;
     $this->vr = $vr;
   }
+
   /**
    * @Rest\Get(path="/videojocs", name="api_llistar_videojocs")
    * @Rest\View(serializerGroups={"videojoc"}, serializerEnableMaxDepthChecks=true)
    */
   public function llistarVideojocs()
   {
-
     return $this->view(["Resultat" => true, "Misatge" => "Llistat de videojocs", "Data" => $this->vr->findAll()], Response::HTTP_ACCEPTED);
   }
 
-  /**
-   * @Rest\Get(path="/videojoc/{id}", name="api_conseguir_videojoc")
+/**
+   * @Rest\Get(path="/videojoc/{id}", name="api_conseguir_videojocs")
    * @Rest\View(serializerGroups={"videojoc"}, serializerEnableMaxDepthChecks=true)
    */
   public function conseguirVideojoc(int $id)
   {
     $videojoc = $this->obtindreJocBd($id);
-    var_dump($videojoc);
     return $this->view(["Resultat" => true, "Misatge" => "Videojoc amb id $id", "Data" => $videojoc], Response::HTTP_ACCEPTED);
   }
 
@@ -82,7 +81,7 @@ class ApiVideojocsController extends AbstractFOSRestController
     $videojoc = $this->obtindreJocBd($id);
     $this->emi->remove($videojoc);
     $this->emi->flush();
-    
+
     return $this->view([
       "Resultat" => false,
       "Misatge" => "El videojoc amb id $id ha sigut borrat de manera correcta.",
@@ -94,7 +93,7 @@ class ApiVideojocsController extends AbstractFOSRestController
    * @Rest\Put(path="/videojoc/{id}/editar", name="api_modificar_videojoc")
    * @Rest\View(serializerGroups={"videojoc"}, serializerEnableMaxDepthChecks=true)
    */
-  public function modificarVideojoc(Request $request,int $id)
+  public function modificarVideojoc(Request $request, int $id)
   {
     $videojoc = $this->obtindreJocBd($id);
     $form = $this->createForm(VideojocType::class, $videojoc);
@@ -102,7 +101,7 @@ class ApiVideojocsController extends AbstractFOSRestController
     $form->submit($data);
     $isSubmited = $form->isSubmitted() && $form->isValid();
     if ($isSubmited) {
-      
+
       $this->emi->flush();
       return $this->view([
         "Resultat" => true,
@@ -112,7 +111,7 @@ class ApiVideojocsController extends AbstractFOSRestController
     }
     return $this->view(["Resultat" => false, "Misatge" => "El videojoc no ha pogut ser creat", "Data" => $form], Response::HTTP_BAD_REQUEST);
   }
-    /**
+  /**
    * @Rest\Get(path="/videojoc/buscar/{titol}", name="api_conseguir_videojoc")
    * @Rest\View(serializerGroups={"videojoc"}, serializerEnableMaxDepthChecks=true)
    */

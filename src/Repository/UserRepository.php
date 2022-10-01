@@ -55,7 +55,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         $this->add($user, true);
     }
-
+    public function conseguirUsuarios()
+    {
+        return $this->createQueryBuilder("u")
+        ->andWhere("u.email IS NOT admin");
+    }
+    
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

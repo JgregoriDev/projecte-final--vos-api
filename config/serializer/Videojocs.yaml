@@ -15,7 +15,7 @@ App\Entity\Videojoc:
             groups: ["videojocs"]
         dataCreacio:
             groups: ["videojocs"]
-        generes:
+        genere:
             groups: ["videojocs"]
         plataformas:
              groups: ['videojocs']
