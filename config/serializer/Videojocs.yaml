@@ -1,0 +1,21 @@
+# config/serializer/Videojocs.yaml
+App\Entity\Videojoc:
+    attributes:
+        id:
+            groups: ["videojocs"]
+        titol:
+            groups: ["videojocs"]
+        portada:
+            groups: ["videojocs"]
+        resena:
+            groups: ["videojocs"]
+        preu:
+            groups: ["videojocs"]
+        cantitat:
+            groups: ["videojocs"]
+        dataCreacio:
+            groups: ["videojocs"]
+        generes:
+            groups: ["videojocs"]
+        plataformas:
+             groups: ['videojocs']
